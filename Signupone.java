@@ -1,15 +1,24 @@
 
 package bank.managment.system;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import com.toedter.calendar.JDateChooser;
-
-public class Signupone extends JFrame {
+import java.awt.event.*;
+public class Signupone extends JFrame implements ActionListener {
+    
+    long random;
+    JTextField nametextfield,fnametextfield,enametextfield,addtextfield,citytextfield,statetextfield,pincodetextfield;
+    JButton next;
+    JRadioButton male,female,mai,unmai,other;
+    JDateChooser datechooser;
+    
+    
     Signupone(){
         setLayout(null);
         Random ran=new Random();
-        long random=Math.abs((ran.nextLong()%9000L)+1000L);
+        random=Math.abs((ran.nextLong()%9000L)+1000L);
         
         JLabel formno=new JLabel("APPLICATION FORM NO. "+random);
         formno.setFont(new Font("Raleway",Font.BOLD,38));
@@ -26,7 +35,7 @@ public class Signupone extends JFrame {
         name.setBounds(100,140,100,30);
         add(name);
         
-        JTextField nametextfield=new JTextField();
+        nametextfield=new JTextField();
         nametextfield.setFont(new Font("Raleway",Font.BOLD,14));
         nametextfield.setBounds(300,140,400,30);
         add(nametextfield);
@@ -36,7 +45,7 @@ public class Signupone extends JFrame {
         fname.setBounds(100,190,200,30);
         add(fname);
         
-         JTextField fnametextfield=new JTextField();
+         fnametextfield=new JTextField();
         fnametextfield.setFont(new Font("Raleway",Font.BOLD,14));
         fnametextfield.setBounds(300,190,400,30);
         add(fnametextfield);
@@ -46,7 +55,7 @@ public class Signupone extends JFrame {
         dob.setBounds(100,240,200,30);
         add(dob);
         
-        JDateChooser datechooser=new JDateChooser();
+        datechooser=new JDateChooser();
         datechooser.setBounds(300,240,400,30);
         datechooser.setForeground(Color.BLACK);
         add(datechooser);
@@ -56,11 +65,11 @@ public class Signupone extends JFrame {
         gender.setBounds(100,290,200,30);
         add(gender);
         
-        JRadioButton male=new JRadioButton("MALE");
+        male=new JRadioButton("MALE");
         male.setBounds(300,290,60,30);
         add(male);
         
-        JRadioButton female=new JRadioButton("FEMALE");
+         female=new JRadioButton("FEMALE");
         female.setBounds(450,290,120,30);
         add(female);
         
@@ -73,7 +82,7 @@ public class Signupone extends JFrame {
         em.setBounds(100,340,200,30);
         add(em);
         
-         JTextField enametextfield=new JTextField();
+        enametextfield=new JTextField();
         enametextfield.setFont(new Font("Raleway",Font.BOLD,14));
         enametextfield.setBounds(300,340,400,30);
         add(enametextfield);
@@ -83,15 +92,15 @@ public class Signupone extends JFrame {
         m.setBounds(100,390,200,30);
         add(m);
         
-        JRadioButton mai=new JRadioButton("MAIRRED");
+         mai=new JRadioButton("MAIRRED");
         mai.setBounds(300,390,100,30);
         add(mai);
         
-        JRadioButton unmai=new JRadioButton("UNMAIRRED");
+         unmai=new JRadioButton("UNMAIRRED");
         unmai.setBounds(450,390,100,30);
         add(unmai);
         
-        JRadioButton other=new JRadioButton("OTHER");
+         other=new JRadioButton("OTHER");
         other.setBounds(630,390,100,30);
         add(other);
         
@@ -105,7 +114,7 @@ public class Signupone extends JFrame {
         ad.setBounds(100,440,200,30);
         add(ad);
         
-         JTextField addtextfield=new JTextField();
+        addtextfield=new JTextField();
         addtextfield.setFont(new Font("Raleway",Font.BOLD,14));
         addtextfield.setBounds(300,440,400,30);
         add(addtextfield);
@@ -115,7 +124,7 @@ public class Signupone extends JFrame {
         city.setBounds(100,490,200,30);
         add(city);
         
-         JTextField citytextfield=new JTextField();
+        citytextfield=new JTextField();
         citytextfield.setFont(new Font("Raleway",Font.BOLD,14));
         citytextfield.setBounds(300,490,400,30);
         add(citytextfield);
@@ -125,7 +134,7 @@ public class Signupone extends JFrame {
         state.setBounds(100,540,200,30);
         add(state);
         
-         JTextField statetextfield=new JTextField();
+        statetextfield=new JTextField();
         statetextfield.setFont(new Font("Raleway",Font.BOLD,14));
         statetextfield.setBounds(300,540,400,30);
         add(statetextfield);
@@ -135,15 +144,16 @@ public class Signupone extends JFrame {
         pincode.setBounds(100,590,200,30);
         add(pincode);
         
-         JTextField pincodetextfield=new JTextField();
+        pincodetextfield=new JTextField();
         pincodetextfield.setFont(new Font("Raleway",Font.BOLD,14));
         pincodetextfield.setBounds(300,590,400,30);
         add(pincodetextfield);
         
-        JButton next =new JButton("NEXT");
+        next =new JButton("NEXT");
         next.setBackground(Color.BLACK);
         next.setForeground(Color.WHITE);
         next.setBounds(620,660,80,30);
+        next.addActionListener(this);
         add(next);
         
         
@@ -152,6 +162,46 @@ public class Signupone extends JFrame {
         setSize(850,800);
         setLocation(350,10);
         setVisible(true);
+    }
+    public void actionPerformed(ActionEvent ae){
+        String formno=""+random;
+        String name=nametextfield.getText();
+        String fname=fnametextfield.getText();
+        String dob=((JTextField)datechooser.getDateEditor().getUiComponent()).getText();
+        String gender=null;
+        if(male.isSelected()){
+            gender="MALE";
+        }
+        else if(female.isSelected()){
+            gender="FEMALE";
+        }
+        String em=enametextfield.getText();
+        String m=null;
+        if(mai.isSelected()){
+            m="MAIRRED";
+        }
+        else if(unmai.isSelected()){
+            m="UNMAIRRED";
+        }
+        else if(other.isSelected()){
+            m="OTHER";
+        }
+        String ad=addtextfield.getText();
+        String city=citytextfield.getText();
+        String state=statetextfield.getText();
+        String pincode=pincodetextfield.getText();
+        
+        try{
+            if(name.equals("")){
+               JOptionPane.showMessageDialog(null,"Name is required");
+            }else{
+                con c=new con();
+                String query = "insert into signup values('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+em+"','"+m+"','"+ad+"','"+city+"','"+pincode+"','"+state+"')";
+                c.s.executeUpdate(query);
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
     public static void main(String args[]){
         new Signupone();
